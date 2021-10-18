@@ -1,11 +1,14 @@
 package com.treasureio.line.services;
 
+import com.treasureio.line.exception.CheckNotFoundException;
 import com.treasureio.line.models.Check;
 import com.treasureio.line.repositories.CheckRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CheckServiceImpl implements CheckService {
@@ -25,6 +28,20 @@ public class CheckServiceImpl implements CheckService {
         return checkRepository.save(check);
     }
 
+    @Override
+    public List<Check> fetchCheckList() {
+        return checkRepository.findAll();
+    }
+
+    @Override
+    public Check fetchCheckById(Long checkId) throws CheckNotFoundException {
+        Optional<Check> check = checkRepository.findById(checkId);
+
+        if(!check.isPresent()) {
+            throw new CheckNotFoundException("Check Not Available");
+        }
+        return check.get();
+    }
 
 
 
