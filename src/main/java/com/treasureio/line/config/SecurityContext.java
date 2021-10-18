@@ -50,7 +50,7 @@ public class SecurityContext extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.cors().disable().csrf().disable()
-                .authorizeRequests().antMatchers("/v1/login").permitAll().
+                .authorizeRequests().antMatchers("/", "/v1/login").permitAll().
                 anyRequest().authenticated()
                 .and().
                 exceptionHandling().
