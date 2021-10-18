@@ -54,6 +54,7 @@ public class FileController {
                     .toUriString();
 
             return new FileResponse(
+                    dbFile.getId(),
                     dbFile.getName(),
                     fileDownloadUri,
                     dbFile.getType(),
